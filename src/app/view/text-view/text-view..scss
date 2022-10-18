@@ -1,0 +1,10 @@
+.text-view {
+  .text-container {
+    font-size: 160px;
+    width: 100%;
+    top:50%;
+    transform: translateY(-50%);
+    text-align: center;
+    position: absolute;
+  }
+}

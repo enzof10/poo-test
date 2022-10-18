@@ -115,6 +115,17 @@ Utils.onClick = function (element, eventHandler) {
     // Utils.addListener(element, "click", handler);
 }
 
+
+/**
+ *
+ * @param element
+ * @param eventHandler
+ */
+ Utils.onChange = function (element, eventHandler) {
+    element.onchange = eventHandler;
+    // Utils.addListener(element, "click", handler);
+}
+
 /**
  *
  * @param element

@@ -7,6 +7,7 @@ import App from "../../app";
 export default class RectangleView extends View {
 
     constructor(ouputLastView  = 0, textTitle, textButtonAhead, colorRect, textButtonBack, onClickBack) {
+        console.log('ouputLastView: ', ouputLastView);
         super(html);
         this.colorRect = colorRect;
         this.textTitle = textTitle;
@@ -30,7 +31,7 @@ export default class RectangleView extends View {
 
 
         if (this.textTitle !== "Vista A") {
-            inputRectangle.remove()
+            inputRectangle && inputRectangle.remove()
             ouputRectangle.innerHTML = this.ouputLastView
         }else{
             Utils.onChange(inputRectangle, (e) => {

@@ -502,3 +502,11 @@ Utils.waitAfterImageLoaded = async function(imageUrl) {
     imgToLoad.onload = () => imgLoadPromise.resolve();
     await imgLoadPromise.promise;
 }
+
+Utils.insertAfter = function (afterNode,newNode){ 
+    if(afterNode.nextSibling){ 
+        afterNode.parentNode.insertBefore(newNode,afterNode.nextSibling); 
+    } else { 
+        afterNode.parentNode.appendChild(newNode); 
+    }
+}

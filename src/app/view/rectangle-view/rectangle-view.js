@@ -2,15 +2,17 @@ import View from "../../../core/view/view";
 import html from "./rectangle-view.html";
 import "./rectangle-view.scss";
 import Utils from "../../../core/utils";
+import App from "../../app";
 
 export default class RectangleView extends View {
 
-    constructor(textTitle, textButtonAhead, colorRect, textButtonBack) {
+    constructor(textTitle, textButtonAhead, colorRect, textButtonBack, onClickBack) {
         super(html);
         this.colorRect = colorRect;
         this.textTitle = textTitle;
-        this.textButtonBack = textButtonBack
+        this.textButtonBack = textButtonBack;
         this.textButtonAhead = textButtonAhead;
+        this.onClickBack = onClickBack;
         this.init();
     }
 
@@ -27,8 +29,9 @@ export default class RectangleView extends View {
             buttonBack.remove()
         } else {
             buttonBack.innerHTML = this.textButtonBack
-            Utils.onClick(buttonBack, (e) => {
-                this.end({ titleElement: this.textTitle })
+            Utils.onClick(buttonBack, async (e) => {
+                this.onClickBack({ titleElement: this.textTitle })
+                this.end({ titleElement: this.textTitle, restart : true })
             })
         }
 

@@ -9,14 +9,26 @@ export default class App {
         const views = {
             viewA: () => new RectangleView("Vista A", "Siguiente", "color-rectangle-a"),
             viewB: () => new RectangleView("Vista B", "Siguiente", "color-rectangle-b"),
-            viewC: () => new RectangleView("Vista C", "Siguiente", "color-rectangle-c",  "Reinciar"),
+            viewC: () => new RectangleView("Vista C", "Siguiente", "color-rectangle-c",  "Reinciar", onClickBack),
             viewD: () => new RectangleView("Vista D", "Atras", "color-rectangle-d",)
         }
 
-        const responseA = await views.viewA().start(ouputApp.titleElement)
-        const responseB = await views.viewB().start(responseA.titleElement)
+        const onClickBack = (titleElement) => {
+            this.start(titleElement)
+        };
+
+        let firstResponse
+        if (ouputApp.titleElement !== "Vista D") {
+            firstResponse = await views.viewA(null).start(ouputApp)
+        } else {
+            firstResponse = ouputApp
+        }
+        const responseB = await views.viewB().start(firstResponse.titleElement)
         const responseC = await views.viewC().start(responseB.titleElement)
-        const responseD = await views.viewD().start(responseC.titleElement)
+        if (!responseC.restart) {
+            const responseD = await views.viewD().start(responseC.titleElement)
+            this.start(responseD)
+        }
 
     }
 }

@@ -35,7 +35,6 @@ export default class Cview extends RectangleView {
         }
 
         Utils.onClick(swap,(e)=>{
-            console.log('e: ', e);
             if(this.isFirstClass){
                 this.addSecondClass()
             }else{

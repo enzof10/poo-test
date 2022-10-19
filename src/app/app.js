@@ -1,4 +1,5 @@
-import Cview from "./view/c-view/c-view";
+import CView from "./view/c-view/c-view";
+import DView from "./view/d-view/d-view";
 import RectangleView from "./view/rectangle-view/rectangle-view";
 
 export default class App {
@@ -10,8 +11,8 @@ export default class App {
         const views = {
             viewA: (ouputLastView) => new RectangleView(ouputLastView, "Vista A", "Siguiente", "color-rectangle-a"),
             viewB: (ouputLastView, isFromD) => new RectangleView(isFromD ? ouputLastView : ouputLastView + 5, "Vista B", "Siguiente", "color-rectangle-b"),
-            viewC: (ouputLastView) => new Cview(ouputLastView, "Vista C", "Siguiente", "color-rectangle-c", "Reinciar", onClickBack),
-            viewD: (ouputLastView) => new RectangleView(8, "Vista D", "Atras", "color-rectangle-d"),
+            viewC: (ouputLastView) => new CView(ouputLastView, "Vista C", "Siguiente", "color-rectangle-c", "Reinciar", onClickBack),
+            viewD: (ouputLastView) => new DView(8, "Vista D", "Atras", "color-rectangle-d"),
         }
 
         const onClickBack = (titleElement) => {
@@ -25,7 +26,6 @@ export default class App {
             firstResponse = ouputApp
         }
         const responseB = await views.viewB(Number(firstResponse.ouputLastView), isFromD ).start(firstResponse.titleElement)
-        console.log('responseB.ouputLastView: ', responseB.ouputLastView);
         const responseC = await views.viewC(responseB.ouputLastView).start(responseB.titleElement)
         if (!responseC.restart) {
             const responseD = await views.viewD(Number(responseC.ouputLastView)).start(responseC.titleElement)
